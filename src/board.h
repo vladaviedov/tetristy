@@ -2,7 +2,6 @@
  * @file board.h
  * @author Vladyslav Aviedov <vladaviedov@protonmail.com>
  * @brief Tetris board
- * @version 0.1
  * @date 2022-05-10
  * 
  * @copyright Copyright (c) 2022
@@ -13,6 +12,10 @@
 
 #include <ncurses.h>
 
+/**
+ * @brief Tetris board
+ * 
+ */
 typedef struct {
 	int lines;
 	int cols;
@@ -21,7 +24,22 @@ typedef struct {
 	WINDOW *inner_win;
 } BOARD;
 
+/**
+ * @brief Create new tetris board.
+ * 
+ * @param lines count of rows
+ * @param cols count of columns
+ * @param starty start y coordinate
+ * @param startx start x coordinate
+ * @return BOARD* - new board object
+ */
 BOARD *new_board(int lines, int cols, int starty, int startx);
+
+/**
+ * @brief Delete a board object.
+ * 
+ * @param board existing board object
+ */
 void del_board(BOARD *board);
 
-#endif
+#endif // TETRISTY_BOARD_H
