@@ -10,6 +10,7 @@
 #include "util.h"
 
 #include <stdlib.h>
+#include <stdarg.h>
 #include <ncurses.h>
 
 /**
@@ -20,4 +21,20 @@
 void quit(int value) {
 	endwin();
 	exit(value);
+}
+
+/**
+ * @brief Print message to stderr and exit
+ * 
+ * @param code exit code
+ * @param format printf style format
+ * @param ... printf arguments
+ */
+void fatal(int code, char *format, ...) {
+	va_list args;
+	va_start(args, format);
+	vfprintf(stderr, format, args);
+	
+	va_end(args);
+	quit(code);
 }

@@ -9,6 +9,8 @@
  * 
  */
 #include <stdio.h>
+#include <string.h>
+#include <errno.h>
 #include <signal.h>
 #include <ncurses.h>
 
@@ -22,6 +24,10 @@ int main(void) {
 	signal(SIGINT, &quit);
 	
 	BOARD *board = new_board(16, 16, 5, 5);
+	if (board == NULL) {
+		fatal(1, "Failed to create board", strerror(errno));
+	}
+
 	getch();
 	
 	del_board(board);

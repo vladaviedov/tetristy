@@ -23,7 +23,6 @@
  */
 BOARD *new_board(int lines, int cols, int starty, int startx) {
 	BOARD *brd = malloc(sizeof(BOARD));
-	// todo: proper error checking
 	if (brd == NULL) {
 		return NULL;
 	}
@@ -33,11 +32,17 @@ BOARD *new_board(int lines, int cols, int starty, int startx) {
 
 	// Create border window
 	brd->border_win = newwin(lines + 2, (cols + 2) * 2, starty, startx);
+	if (brd->border_win == NULL) {
+		return NULL;
+	}
 	box(brd->border_win, ACS_VLINE, ACS_HLINE);
 	wrefresh(brd->border_win);
 
 	// Create inner window
 	brd->inner_win = derwin(brd->border_win, lines, cols * 2, 1, 1);
+	if (brd->inner_win == NULL) {
+		return NULL;
+	}
 	wrefresh(brd->inner_win);
 	
 	return brd;
@@ -51,7 +56,13 @@ BOARD *new_board(int lines, int cols, int starty, int startx) {
 void del_board(BOARD *board) {
 	if (board == NULL) return;
 
-	delwin(board->border_win);
-	delwin(board->inner_win);
+	if (board->inner_win != NULL) {
+		delwin(board->inner_win);
+	}
+	
+	if (board->border_win != NULL) {
+		delwin(board->border_win);
+	}
+
 	free(board);
 }

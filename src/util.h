@@ -17,4 +17,13 @@
  */
 void quit(int value);
 
+/**
+ * @brief Report fatal error.
+ * 
+ * @param code exit code
+ * @param format printf style format
+ * @param ... printf arguments
+ */
+void fatal(int code, char *format, ...);
+
 #endif // TETRISTY_UTIL_H
