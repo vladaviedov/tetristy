@@ -31,10 +31,12 @@ void quit(int value) {
  * @param ... printf arguments
  */
 void fatal(int code, char *format, ...) {
+	endwin();
+
 	va_list args;
 	va_start(args, format);
 	vfprintf(stderr, format, args);
 	
 	va_end(args);
-	quit(code);
+	exit(code);
 }

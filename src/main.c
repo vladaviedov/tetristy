@@ -25,7 +25,7 @@ int main(void) {
 	
 	BOARD *board = new_board(16, 16, 5, 5);
 	if (board == NULL) {
-		fatal(1, "Failed to create board", strerror(errno));
+		fatal(1, "Failed to create board: %s\n", strerror(errno));
 	}
 
 	getch();
