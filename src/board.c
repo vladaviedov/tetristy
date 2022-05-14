@@ -46,14 +46,14 @@ BOARD *new_board(uint32_t lines, uint32_t cols, uint32_t starty, uint32_t startx
 	wrefresh(brd->inner_win);
 	
 	// Create board data
-	brd->board = malloc(sizeof(cell *) * lines);
-	if (brd->board == NULL) {
+	brd->cells = malloc(sizeof(cell *) * lines);
+	if (brd->cells == NULL) {
 		return NULL;
 	}
 
 	for (uint32_t i = 0; i < lines; i++) {
-		brd->board[i] = calloc(sizeof(cell), cols);
-		if (brd->board[i] == NULL) {
+		brd->cells[i] = calloc(sizeof(cell), cols);
+		if (brd->cells[i] == NULL) {
 			return NULL;
 		}
 	}
@@ -75,9 +75,29 @@ void del_board(BOARD *board) {
 
 	// Free data
 	for (uint32_t i = 0; i < board->lines; i++) {
-		free(board->board[i]);
+		free(board->cells[i]);
 	}
-	free(board->board);
+	free(board->cells);
 
 	free(board);
+}
+
+/**
+ * @brief Redraw modified cells.
+ * 
+ * @param board board
+ */
+void draw_board(BOARD *board) {
+	for (uint32_t i = 0; i < board->lines; i++) {
+		for (uint32_t j = 0; j < board->cols; j++) {
+			cell *cell = &board->cells[i][j];
+			if (!cell->touched)
+				continue;
+
+			wattr_on(board->inner_win, COLOR_PAIR(cell->color), A_NORMAL);
+			mvwaddch(board->inner_win, i, j, ' ');
+		}
+	}
+
+	wrefresh(board->inner_win);
 }

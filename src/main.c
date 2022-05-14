@@ -15,10 +15,13 @@
 #include <ncurses.h>
 
 #include "board.h"
+#include "colors.h"
 #include "util.h"
 
 int main(void) {
 	initscr();
+	start_color();
+	make_colors();
 	refresh();
 
 	signal(SIGINT, &quit);
@@ -28,6 +31,10 @@ int main(void) {
 		fatal(1, "Failed to create board: %s\n", strerror(errno));
 	}
 
+	board->cells[0][0].color = 1;
+	board->cells[0][0].touched = 1;
+
+	draw_board(board);
 	getch();
 	
 	del_board(board);

@@ -15,6 +15,7 @@
 
 typedef struct {
 	bool solid;
+	bool touched;
 	int color;
 } cell;
 
@@ -28,7 +29,7 @@ typedef struct {
 	uint32_t cols;
 
 	// Board state
-	cell **board;
+	cell **cells;
 
 	// Ncurses windoes
 	WINDOW *border_win;
@@ -49,8 +50,15 @@ BOARD *new_board(uint32_t lines, uint32_t cols, uint32_t starty, uint32_t startx
 /**
  * @brief Delete a board object.
  * 
- * @param board existing board object
+ * @param board board
  */
 void del_board(BOARD *board);
+
+/**
+ * @brief Draw the current board state.
+ * 
+ * @param board board
+ */
+void draw_board(BOARD *board);
 
 #endif // TETRISTY_BOARD_H
