@@ -1,7 +1,7 @@
 /**
  * @file main.c
- * @author Vladyslav Aviedov <vladaviedov@protonmail.com>
- * @brief Entry point
+ * @author Vladyslav Aviedov (vladaviedov@protonmail.com)
+ * @brief Entry point.
  * @version 0.1.0
  * @date 2022-05-10
  * 

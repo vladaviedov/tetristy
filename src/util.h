@@ -1,7 +1,7 @@
 /**
  * @file util.h
- * @author Vladyslav Aviedov <vladaviedov@protonmail.com>
- * @brief Utility package 
+ * @author Vladyslav Aviedov (vladaviedov@protonmail.com)
+ * @brief Utility package.
  * @date 2022-05-10
  * 
  * @copyright Copyright (c) 2022

@@ -1,7 +1,7 @@
 /**
  * @file board.h
- * @author Vladyslav Aviedov <vladaviedov@protonmail.com>
- * @brief Tetris board
+ * @author Vladyslav Aviedov (vladaviedov@protonmail.com)
+ * @brief Tetris board.
  * @date 2022-05-10
  * 
  * @copyright Copyright (c) 2022
@@ -11,15 +11,25 @@
 #define TETRISTY_BOARD_H
 
 #include <ncurses.h>
+#include <stdbool.h>
+
+typedef struct {
+	bool taken;
+} cell;
 
 /**
  * @brief Tetris board
  * 
  */
 typedef struct {
-	int lines;
-	int cols;
+	// Dimensions
+	uint32_t lines;
+	uint32_t cols;
 
+	// Board state
+	uint64_t *board;
+
+	// Ncurses windoes
 	WINDOW *border_win;
 	WINDOW *inner_win;
 } BOARD;

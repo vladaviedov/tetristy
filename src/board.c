@@ -1,7 +1,7 @@
 /**
  * @file board.c
- * @author Vladyslav Aviedov <vladaviedov@protonmail.com>
- * @brief Tetris board
+ * @author Vladyslav Aviedov (vladaviedov@protonmail.com)
+ * @brief Tetris board.
  * @date 2022-05-10
  * 
  * @copyright Copyright (c) 2022
