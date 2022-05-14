@@ -10,6 +10,7 @@
 #ifndef TETRISTY_COLORS_H
 #define TETRISTY_COLORS_H
 
+#define CLR_DEFAULT 0
 #define CLR_I 1
 #define CLR_J 2
 #define CLR_L 3

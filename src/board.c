@@ -21,7 +21,7 @@
  * @param startx start x coordinate
  * @return BOARD* - new board object
  */
-BOARD *new_board(int lines, int cols, int starty, int startx) {
+BOARD *new_board(uint32_t lines, uint32_t cols, uint32_t starty, uint32_t startx) {
 	BOARD *brd = malloc(sizeof(BOARD));
 	if (brd == NULL) {
 		return NULL;
@@ -45,6 +45,19 @@ BOARD *new_board(int lines, int cols, int starty, int startx) {
 	}
 	wrefresh(brd->inner_win);
 	
+	// Create board data
+	brd->board = malloc(sizeof(cell *) * lines);
+	if (brd->board == NULL) {
+		return NULL;
+	}
+
+	for (uint32_t i = 0; i < lines; i++) {
+		brd->board[i] = calloc(sizeof(cell), cols);
+		if (brd->board[i] == NULL) {
+			return NULL;
+		}
+	}
+
 	return brd;
 }
 
@@ -56,13 +69,15 @@ BOARD *new_board(int lines, int cols, int starty, int startx) {
 void del_board(BOARD *board) {
 	if (board == NULL) return;
 
-	if (board->inner_win != NULL) {
-		delwin(board->inner_win);
+	// Remove windows
+	delwin(board->inner_win);
+	delwin(board->border_win);
+
+	// Free data
+	for (uint32_t i = 0; i < board->lines; i++) {
+		free(board->board[i]);
 	}
-	
-	if (board->border_win != NULL) {
-		delwin(board->border_win);
-	}
+	free(board->board);
 
 	free(board);
 }

@@ -14,7 +14,8 @@
 #include <stdbool.h>
 
 typedef struct {
-	bool taken;
+	bool solid;
+	int color;
 } cell;
 
 /**
@@ -27,7 +28,7 @@ typedef struct {
 	uint32_t cols;
 
 	// Board state
-	uint64_t *board;
+	cell **board;
 
 	// Ncurses windoes
 	WINDOW *border_win;
@@ -43,7 +44,7 @@ typedef struct {
  * @param startx start x coordinate
  * @return BOARD* - new board object
  */
-BOARD *new_board(int lines, int cols, int starty, int startx);
+BOARD *new_board(uint32_t lines, uint32_t cols, uint32_t starty, uint32_t startx);
 
 /**
  * @brief Delete a board object.
