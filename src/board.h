@@ -19,14 +19,10 @@ typedef struct {
 	int color;
 } cell;
 
-/**
- * @brief Tetris board
- * 
- */
 typedef struct {
 	// Dimensions
-	uint32_t lines;
-	uint32_t cols;
+	int lines;
+	int cols;
 
 	// Board state
 	cell **cells;
@@ -34,7 +30,7 @@ typedef struct {
 	// Ncurses windoes
 	WINDOW *border_win;
 	WINDOW *inner_win;
-} BOARD;
+} board;
 
 /**
  * @brief Create new tetris board.
@@ -45,20 +41,38 @@ typedef struct {
  * @param startx start x coordinate
  * @return BOARD* - new board object
  */
-BOARD *new_board(uint32_t lines, uint32_t cols, uint32_t starty, uint32_t startx);
+board *brd_new(int lines, int cols, int starty, int startx);
 
 /**
  * @brief Delete a board object.
  * 
  * @param board board
  */
-void del_board(BOARD *board);
+void brd_del(board *board);
 
 /**
  * @brief Draw the current board state.
  * 
  * @param board board
  */
-void draw_board(BOARD *board);
+void brd_draw(board *board);
+
+/**
+ * @brief Change one cell in the board.
+ * 
+ * @param board board
+ * @param y y-coordinate
+ * @param x x-coordinate
+ * @param color color pair
+ * @returns int - 0 if no change, 1 if changed
+ */
+int brd_touch(board *board, int y, int x, int color);
+
+/**
+ * @brief Clear board.
+ * 
+ * @param board board
+ */
+void brd_clear(board *board);
 
 #endif // TETRISTY_BOARD_H
